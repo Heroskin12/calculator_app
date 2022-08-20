@@ -211,12 +211,21 @@ arrBtn.forEach(btn => {
                     
 
                     if (string1.indexOf('.') > 0 || string2.indexOf('.') > 0) {
-                        calculator.result = Math.pow(parseFloat(calculator.firstOperand), parseFloat(calculator.currentOperand));                        
+                        calculator.result = Math.pow(parseFloat(calculator.firstOperand), parseFloat(calculator.currentOperand));  
+                        result.innerText = calculator.result.toFixed(6)
+                        for (let i = result.innerText.length - 1; i > -1; i--) {
+                            if (result.innerText[i] === "0") {
+                                result.innerText = result.innerText.slice(0,-1);
+                            } 
+                            else {
+                                break;
+                            }
+                        }                        
                     }
                     else {
                         calculator.result = Math.pow(parseInt(calculator.firstOperand), parseInt(calculator.currentOperand));
-                    }
                         result.innerText = calculator.result;
+                    }
                         calculator.currentOperator = btn.textContent;
                         calculator.currentOperand = 0;
                         calculator.firstOperand = null;
@@ -466,12 +475,21 @@ equal.addEventListener('click', function() {
         string2 = string2.toString();
 
         if (string1.indexOf('.') > 0 || string2.indexOf('.') > 0) {
-            calculator.result = Math.pow(parseFloat(calculator.firstOperand), parseFloat(calculator.currentOperand));                        
+            calculator.result = Math.pow(parseFloat(calculator.firstOperand), parseFloat(calculator.currentOperand));     
+            result.innerText = calculator.result.toFixed(6)
+                        for (let i = result.innerText.length - 1; i > -1; i--) {
+                            if (result.innerText[i] === "0") {
+                                result.innerText = result.innerText.slice(0,-1);
+                            } 
+                            else {
+                                break;
+                            }
+                        }                   
         }
         else {
             calculator.result = Math.pow(parseInt(calculator.firstOperand), parseInt(calculator.currentOperand));
-        }
             result.innerText = calculator.result;
+        }
             calculator.firstOperand = null;
             calculator.currentOperand = 0;
             input.style.fontSize = '1rem';

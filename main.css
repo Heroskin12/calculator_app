@@ -7,6 +7,7 @@
 body {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #333;
+    background: #FAFEFF;
     
 }
 
@@ -16,22 +17,24 @@ i {
 
 .container {
     max-width: 1280px;
-    margin: 100px auto;    
+    margin: 20px auto;    
 }
 
 .outer_calc {
     margin: auto;
     width: 430px;
-    height: 680px;
-    background: blue;
+    height: 690px;
+    background: #3f7eb3;
     display: flex;
     flex-direction: column;
+    padding: 10px 0;
+    border-radius: 2%;
 }
 
 .display_bar {
     width: 90%;
     margin: 15px auto;
-    background: red;
+    background: #fafeff;
     height: 100px;
     text-align: right;
 }
@@ -60,11 +63,9 @@ i {
     font-size: 2rem;
     cursor: pointer;
     transition: all 0.5s;
-}
-
-.buttons button:hover {
-    background: rgb(226, 30, 30);
-    color: #fff;
+    background: #E2FCFF;
+    border: none;
+    outline: none;
 }
 
 .buttons button.ans {
@@ -72,11 +73,39 @@ i {
     grid-column-end: 3;
     width: 100%;
     height: 50px;
+    background:rgb(236, 158, 13);
+    color: #fff;
 }
 .buttons button.undo {
     grid-column-start: 3;
     grid-column-end: 5;
     width: 100%;
-    background: red;
+    background: rgb(236, 158, 13);
     height: 50px;
+}
+
+.buttons .function {
+    background: #FAFEFF;
+    color: #333;
+}
+
+.buttons .clear {
+    background:rgb(236, 158, 13);
+    color: #fff;
+}
+
+.buttons button:hover {
+    background: #6BA7CC;
+    color: #fff;
+}
+
+#footer {
+    position: fixed;
+    text-align: center;
+    background: #6BA7CC;
+    color: #fff;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding: 1.7rem;
 }
