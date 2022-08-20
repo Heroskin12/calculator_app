@@ -27,41 +27,29 @@ const calculator = {
 // Main loop for button click.
 arrBtn.forEach(btn => {
     btn.addEventListener('click', function() {
-        // When there is no input.
-        if (input.innerText === "Enter a number.") {
+        // Set the rules for the first button clicked.
+        if (input.innerText === "Enter a number." || input.innerText === "ERROR") {
             input.style.fontSize = '2rem'; 
             result.style.fontSize = '1rem'; // makes input bigger than result.
             result.innerText = 0; // auto-set result to 0.
                 if (btn.innerText < "0" || btn.innerText > "9") {
                     return input.innerText = "ERROR"; // throws error if first button clicked is not valid.
                 }
-            input.innerText = btn.innerText;
-            calculator.currentOperand = btn.innerText;
-        }
-
-        else if (input.innerText === "ERROR") {
-            if (btn.innerText === "+" || btn.innerText === "-" || btn.innerText === "x" || btn.innerText === "/" || btn.innerText === "^") {
-                input.innerText = "ERROR"; // Continue to throw error if invalid button clicked after error already displayed.
-            }
+            calculator.currentOperand = input.innerText = btn.innerText;
+            console.log(calculator.currentOperand);
         }
         
+        // Set the rules for when user enters an operator.
         else if (btn.innerText === "+" || btn.innerText === "-" || btn.innerText === "x" || btn.innerText === "/" || btn.innerText === "^") {
             input.innerText += btn.innerText;  
-            let string3 = calculator.currentOperand;
-            string3 = string3.toString();
-            if (string3.indexOf("%") > 0) {
-                string3 = string3.slice(0, -1);
-                calculator.currentOperand = string3;
-                // Calculate the percentage as a decimal.
-                calculator.currentOperand = (parseFloat(calculator.currentOperand / 100));
-                console.log(calculator.currentOperand);
-            }          
+            calculator.currentOperand = ifPerCent(calculator.currentOperand);  
+            
 
             if (calculator.firstOperand === null) {
                 // Deals with the first operator in the equation.
                 calculator.firstOperand = calculator.currentOperand;
                 calculator.currentOperand = "0";
-                calculator.currentOperator = btn.textContent;
+                calculator.currentOperator = btn.innerText;
             }            
             else {
                 if (calculator.currentOperator === "+") {
@@ -322,14 +310,7 @@ percentage.addEventListener('click', function() {
 }});
 
 equal.addEventListener('click', function() {
-    let string3 = calculator.currentOperand;
-    string3 = string3.toString();
-    if (string3.indexOf("%") > 0) {
-        // Work out the percentage as a decimal if valid.
-        string3 = string3.slice(0, -1);
-        calculator.currentOperand = string3;
-        calculator.currentOperand = (parseFloat(calculator.currentOperand / 100));
-    }
+    calculator.currentOperand = ifPerCent(calculator.currentOperand);
     if (calculator.currentOperator === "+") {
         if (calculator.firstOperand === "Ans") {
             calculator.firstOperand = previousAnswer;
@@ -499,5 +480,21 @@ equal.addEventListener('click', function() {
     previousAnswer = calculator.result;
 });
 
+function ifPerCent (currentOperand) {
+    let string = currentOperand;
+    console.log(string);
+    string = string.toString();
+    if (string.indexOf("%") > 0) {
+        string = string.slice(0, -1);
+        currentOperand = string;
+        currentOperand = parseFloat(currentOperand) / 100;
+        console.log(currentOperand);
+        return currentOperand;
+    }
+    else {
+        return currentOperand;
+    }
+
+}
 
 
