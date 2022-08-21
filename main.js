@@ -494,7 +494,6 @@ function ifPerCent (currentOperand) {
     else {
         return currentOperand;
     }
-
-}
+};
 
 
