@@ -1,111 +1,62 @@
-* {
-    margin: 0;
-    padding: 0;
+@import url('https://fonts.googleapis.com/css2?family=Nova+Round&display=swap');
+
+*, *::before, *::after {
+    font-family: "Nova Round", sans-serif;
     box-sizing: border-box;
+    font-weight: normal;
 }
 
 body {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #333;
-    background: #FAFEFF;
-    
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to left, #AEDBF0, #FAFEFF);
 }
 
-i {
+#calculator {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);    
+    grid-template-rows: minmax(120px, auto) repeat(6, 100px);  
+    justify-content: center;
+    align-content: center;
+    min-height: 100vh;
+    gap: 5px;
+}
+
+#calculator > button {   
+    border: none;
+    background: rgba(255, 255, 255, .75);
+    cursor: pointer;
+    font-size: 2rem;
+    transition: all .5s;    
+}
+
+#calculator > button:hover {
+    background: rgba(174, 219, 240, .9);
     color: #fff;
 }
 
-.container {
-    max-width: 1280px;
-    margin: 20px auto;    
-}
-
-.outer_calc {
-    margin: auto;
-    width: 430px;
-    height: 690px;
-    background: #3f7eb3;
+#calculator .display_bar {
+    grid-column: 1/-1;
     display: flex;
     flex-direction: column;
-    padding: 10px 0;
-    border-radius: 2%;
+    justify-content: space-around;
+    padding: 15px;
+    align-items: flex-end;
+    background: #3F7EB3;
+    color: rgba(255, 255, 255, 0.75);
+    word-wrap: break-word;
+    word-break: break-all;
 }
 
-.display_bar {
-    width: 90%;
-    margin: 15px auto;
-    background: #fafeff;
-    height: 100px;
-    text-align: right;
-}
+#calculator .display_bar .result {
+    font-size: 1.4rem;
+} 
 
-.display_bar p {
-    font-size: 1.6rem;
-    padding-right: 1rem;
-    overflow: hidden;
-}
-
-.display_bar .result {
-    font-size: 1.2rem;
-    padding: 1rem;
-}
-
-.buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 7px;
-    margin: 5px auto;
-}
-
-.buttons button {
-    height: 90px;
-    width: 90px;
+#calculator .display_bar .input {
     font-size: 2rem;
-    cursor: pointer;
-    transition: all 0.5s;
-    background: #E2FCFF;
-    border: none;
-    outline: none;
 }
 
-.buttons button.ans {
-    grid-column-start: 1;
-    grid-column-end: 3;
-    width: 100%;
-    height: 50px;
-    background:rgb(236, 158, 13);
-    color: #fff;
-}
-.buttons button.undo {
-    grid-column-start: 3;
-    grid-column-end: 5;
-    width: 100%;
-    background: rgb(236, 158, 13);
-    height: 50px;
+.double {
+    grid-column: span 2;
 }
 
-.buttons .function {
-    background: #FAFEFF;
-    color: #333;
-}
-
-.buttons .clear {
-    background:rgb(236, 158, 13);
-    color: #fff;
-}
-
-.buttons button:hover {
-    background: #6BA7CC;
-    color: #fff;
-}
-
-#footer {
-    position: fixed;
-    text-align: center;
-    background: #6BA7CC;
-    color: #fff;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    padding: 1.7rem;
-}

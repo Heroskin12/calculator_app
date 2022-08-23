@@ -8,39 +8,33 @@
     <title>myCalculator | Simplify Math</title>
 </head>
 <body>
-    <section id="calculator">
-        <div class="container">
-            <div class="outer_calc">
-                <div class="display_bar">
-                    <p class="result">0</p>
-                    <p class="input">Enter a number.</p>
-                </div>
-                    <div class="buttons">
-                        <button class="clear">C</button>
-                        <button class="number function">^</button>
-                        <button class="percentage function">%</button>
-                        <button class="number function">/</button>
-                        <button class="number">7</button>                
-                        <button class="number">8</button>
-                        <button class="number">9</button>
-                        <button class="number function">x</button>
-                        <button class="number">4</button>
-                        <button class="number">5</button>
-                        <button class="number">6</button>
-                        <button class="number function">-</button>
-                        <button class="number">1</button>
-                        <button class="number">2</button>
-                        <button class="number">3</button>
-                        <button class="number function">+</button>
-                        <button class="negative">+/-</button>
-                        <button class="number">0</button>
-                        <button class="decimal">.</button>
-                        <button class="equal function">=</button>
-                        <button class="ans">Ans</button>
-                        <button class="undo"><i class="fa-solid fa-delete-left"></i></button>
-                    </div>
-            </div>
-        </div>
+    <section id="calculator">        
+        <div class="display_bar">
+            <div data-firstOperand class="result"></div>
+            <div data-currentOperand class="input"></div>
+        </div>        
+        <button data-clear>AC</button>
+        <button data-function>^</button>
+        <button data-number>%</button>
+        <button data-function>÷</button>
+        <button data-number>7</button>                
+        <button data-number>8</button>
+        <button data-number>9</button>
+        <button data-function>x</button>
+        <button data-number>4</button>
+        <button data-number>5</button>
+        <button data-number>6</button>
+        <button data-function>-</button>
+        <button data-number>1</button>
+        <button data-number>2</button>
+        <button data-number>3</button>
+        <button data-function>+</button>
+        <button data-number>+/-</button>
+        <button data-number>0</button>
+        <button data-number>.</button>
+        <button data-equal>=</button>
+        <button data-number class="double">Ans</button>
+        <button data-delete class="double">Del</button>
     </section>
 
     <section id="footer">
