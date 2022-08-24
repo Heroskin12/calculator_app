@@ -7,29 +7,40 @@ const firstOperandText = document.querySelector('[data-firstOperand]'); // the t
 const currentOperandText = document.querySelector('[data-currentOperand]'); // the text area where the current input is displayed.
 let result;
 
-
+// What to do when a number, decimal or percentage is clicked.
 numbers.forEach(button => {
     button.addEventListener('click', () => {
-        if (result === 'done') calculator.currentOperand = '';
+        if (result === 'done') {
+            calculator.currentOperand = ''; 
+            result = '';
+        }// tells calc to overwrite an existing result string instead of adding to it.
         appendNumber(button.innerText); //adds the number to the input text.
-        updateDisplay();
+        updateDisplay(); 
     })
 });
 
+// What to do when an operator is clicked.
 operators.forEach(button => {
     button.addEventListener('click', () => {
-        chooseOperator(button.innerText);
+        chooseOperator(button.innerText); // parse the current operator.
         updateDisplay();
     })
 })
 
+// What to do when the equal button is clicked.
 equal.addEventListener('click', () => {
     operate(calculator, result);
     updateDisplay();
+    result = 'done'
 })
-allClear.addEventListener('click', () => {clear();}); // resets the calculator.
+
+// Do a full reset on calc. Only calculator.previousAnswer retains information.
+allClear.addEventListener('click', () => {clear();}); 
+
+// Delete last digit.
 undo.addEventListener('click', () => {undoLast()}); //removes previous digit.
 
+// Define calculator object.
 const calculator = {
     firstOperand: '',
     currentOperator: undefined,
@@ -37,6 +48,7 @@ const calculator = {
     previousAnswer: 0,
 };
 
+// Clear Function (Called on AC click)
 function clear() {    
         calculator.firstOperand = '';
         calculator.currentOperand = '';
@@ -46,43 +58,49 @@ function clear() {
         currentOperandText.innerText = '';
     };
 
+// Delete last digit function (Called on Del click)
 function undoLast() {
     calculator.currentOperand = calculator.currentOperand.toString().slice(0, -1);
     currentOperandText.innerText = calculator.currentOperand;
 };
 
+// Add number to currentOperand and currentOperandText (Called on number click)
 function appendNumber(btnText) {
-    if (btnText === '.' && currentOperandText.innerText.includes('.')) return;
-    if (btnText === '%' && currentOperandText.innerText.includes('%')) return;
-    if (btnText === 'Ans') return calculator.currentOperand += calculator.previousAnswer;
-    if (btnText === '+/-') return calculator.currentOperand = '-';
+    if (btnText === '.' && currentOperandText.innerText.includes('.')) return; // only allow one decimal per operand.
+    if (btnText === '%' && currentOperandText.innerText.includes('%')) return; // only allow one percentage symbol per operand.
+    if (btnText === 'Ans') return calculator.currentOperand += calculator.previousAnswer; // Display value of previous answer instead of 'Ans'.
+    if (btnText === '+/-') return calculator.currentOperand = '-'; // Display a negative sign instead of '+/-'
     calculator.currentOperand += btnText;
 
 }
 
+// Changes display whenever there is a change to current or first operand.
 function updateDisplay() {
     currentOperandText.innerText = calculator.currentOperand;
+    console.log(calculator.currentOperand);
     if (calculator.currentOperator !== undefined && calculator.firstOperand !== '') {
         firstOperandText.innerText = `${calculator.firstOperand} ${calculator.currentOperator}`;
     }
     else {
-        firstOperandText.innerText = ' ';
+        firstOperandText.innerText = ' '; // display empty string when equal is clicked.
     }
 }
 
+// Calls the operate function and updates operator.
 function chooseOperator(btnText, result) {
-    if (calculator.currentOperand === "") return;
+    if (calculator.currentOperand === "") return; // error check.
     if (calculator.firstOperand !== "") operate(calculator, result);
-    calculator.currentOperator = btnText;
+    calculator.currentOperator = btnText; // prepares operator for next time operate function is called.
     calculator.firstOperand = calculator.currentOperand;
     calculator.currentOperand = '';
 }
 
+// Carries out the equation.
 function operate(calculator, result) {
     let firstNumber = parseFloat(calculator.firstOperand);
-    if (currentOperandText.innerText.includes('%')) ifPerCent();
+    if (currentOperandText.innerText.includes('%')) ifPerCent(); // prepares currentOperand if it is a percentage.
     let currentNumber = parseFloat(calculator.currentOperand);
-    if (isNaN(firstNumber) || isNaN(currentNumber)) return;
+    if (isNaN(firstNumber) || isNaN(currentNumber)) return; // does nothing if either number is invalid.
     
     switch (calculator.currentOperator) {
         case "+" : 
@@ -109,6 +127,7 @@ function operate(calculator, result) {
     calculator.currentOperator = undefined;    
 }
 
+// Prepares a percentage operand depending on the operator.
 function ifPerCent() {
     calculator.currentOperand = calculator.currentOperand.slice(0, -1);
     switch (calculator.currentOperator) {
@@ -122,12 +141,15 @@ function ifPerCent() {
 
         case "x" :
             calculator.currentOperand = (1 / 100) * calculator.currentOperand;
-            console.log(`Current Operand : ${calculator.currentOperand}`)
             break;
         
         case "÷" : 
             calculator.currentOperand = (1 / 100) * calculator.currentOperand;
-            console.log(`Current Operand : ${calculator.currentOperand}`)
+            break;
+
+        case "^":
+            calculator.currentOperand = (1/100) * calculator.currentOperand;
             break;
     }
 }
+

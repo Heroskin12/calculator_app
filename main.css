@@ -20,6 +20,7 @@ body {
     align-content: center;
     min-height: 100vh;
     gap: 5px;
+    margin-bottom: 2rem;
 }
 
 #calculator > button {   
@@ -58,5 +59,13 @@ body {
 
 .double {
     grid-column: span 2;
+}
+
+#footer {
+    text-align: center;
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.75);
+    background: #3F7EB3;
+    padding: 1rem;
 }
 
